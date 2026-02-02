@@ -27,10 +27,21 @@ def parse_python_file(file_path: str):
             imports.append(node.module)
 
         elif isinstance(node, ast.Call) and current_function:
+    # foo()
             if isinstance(node.func, ast.Name):
                 calls.append({
                     "caller": current_function,
-                    "callee": node.func.id
+                    "callee": node.func.id,
+                    "type": "function"
+                })
+
+        # obj.method()
+            elif isinstance(node.func, ast.Attribute):
+                calls.append({
+                    "caller": current_function,
+                    "callee": node.func.attr,
+                    "object": ast.unparse(node.func.value),
+                    "type": "method"
                 })
 
     return {
