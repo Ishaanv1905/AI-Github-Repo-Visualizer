@@ -16,7 +16,7 @@ def analyze_project(project_root: str) -> ProjectIndex:
     source_index = build_source_index(index.file_tree, project_root)
     index.language_stats = source_index["language_stats"]
     index.source_files = source_index["source_files"]
-
+    
     # 3. Entry points
     for path, meta in index.source_files.items():
         if meta["language"] == "python":
@@ -28,8 +28,17 @@ def analyze_project(project_root: str) -> ProjectIndex:
 
     # 5. Call graph
     parsed = parse_repo(project_root)
+    
     for file in parsed:
+    # calls
         for call in file.get("calls", []):
             index.calls.append(call)
+
+    # imports (THIS WAS MISSING)
+        for imp in file.get("imports", []):
+            index.imports.append({
+                "file": file.get("file_path"),
+                "module": imp
+            })
     index.file_dependencies = build_file_dependencies(parsed, project_root)
     return index

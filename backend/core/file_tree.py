@@ -8,7 +8,9 @@ LANGUAGE_MAP = {
     ".cpp": "cpp",
     ".c": "c",
     ".go": "go",
-    ".rs": "rust"
+    ".rs": "rust",
+    ".html":"html",
+    ".css":"css"
 }
 IGNORE_DIRS = {
     ".git",

@@ -9,6 +9,7 @@ class ProjectIndex:
         self.apis = []
         self.calls = []
         self.file_dependencies = []
+        self.imports=[]
 
 
     def to_dict(self):
@@ -19,5 +20,6 @@ class ProjectIndex:
             "apis": self.apis,
             "calls": self.calls,
             "file_dependencies": self.file_dependencies,
+            "imports": self.imports,
             "source_files_count": len(self.source_files)
         }

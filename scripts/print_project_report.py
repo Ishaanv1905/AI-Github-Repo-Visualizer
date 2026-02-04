@@ -6,7 +6,7 @@ def print_section(title):
     print(title)
     print("=" * 60)
 
-project = analyze_project("test_project/simple_flask_app")
+project = analyze_project("test_project/Face_Recognition_Main-main")
 
 print_section("PROJECT ROOT")
 print(project.root)
